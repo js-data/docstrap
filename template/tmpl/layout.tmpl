@@ -9,9 +9,50 @@
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<link type="text/css" rel="stylesheet" href="styles/sunlight.<?js= this.navOptions.syntaxTheme ?>.css">
-
+	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/googlecode.min.css">
 	<link type="text/css" rel="stylesheet" href="styles/site.<?js= this.navOptions.theme ?>.css">
+  <style>
+    a {
+      text-decoration: none !important;
+    }
+    .hljs {
+      padding: 0;
+      background: none;
+    }
+    #toc {
+      position: fixed;
+      margin-top: 62px;
+      max-height: 82%;
+      max-height: calc(100% - 72px);
+      overflow: auto;
+      padding: 5px;
+    }
+    #toc .list-group-item {
+      padding: 5px 15px;
+    }
+    #toc .list-group-item span.toc-h3 {
+      font-weight: bold;
+    }
+    #toc .list-group-item span.toc-h4 {
+      font-family: monospace;
+      letter-spacing: -1px;
+    }
+    article h4.name, article dt.name {
+      font-family: monospace;
+      font-weight: bold;
+    }
+    .code-panel.panel pre {
+      background-color: #FBFBFB;
+      border-color: #E6E5E5;
+    }
+    span.param-type a {
+      padding: 3px 5px;
+    }
+    span.param-type a:hover {
+      background-color: #158CBA;
+      color: #fff;
+    }
+  </style>
 
 </head>
 
@@ -59,7 +100,15 @@
 <div class="row">
 
 	<?js if(docs && docs[0].kind !== "source"){ ?>
-	<div class="col-md-8">
+		<div class="col-md-3 hidden-xs hidden-sm hidden-md">
+			<div id="toc"></div>
+		</div>
+	<?js } ?>
+
+	<!-- <div class="clearfix"></div> -->
+
+	<?js if(docs && docs[0].kind !== "source"){ ?>
+	<div class="col-md-8 col-md-offset-4">
 	<?js } else { ?>
 	<div class="col-md-12">
 	<?js } ?>
@@ -67,14 +116,6 @@
 			<?js= content ?>
 		</div>
 	</div>
-
-	<div class="clearfix"></div>
-
-	<?js if(docs && docs[0].kind !== "source"){ ?>
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
-	<?js } ?>
 
 </div>
 </div>
@@ -115,6 +156,8 @@
 <script src="scripts/docstrap.lib.js"></script>
 <script src="scripts/toc.js"></script>
 <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/languages/javascript.min.js"></script>
 
 <script>
 $( function () {
@@ -142,18 +185,14 @@ $( function () {
 		if ( lang ) {
 
 			$this
-			.addClass( "sunlight-highlight-" + lang )
+			.addClass( lang )
 			.addClass( "linenums" )
 			.html( example.html() );
 
 		}
 	} );
 
-	Sunlight.highlightAll( {
-		lineNumbers : <?js= this.navOptions.linenums || false ?>,
-		showMenu : true,
-		enableDoclinks : true
-	} );
+	hljs.initHighlightingOnLoad();
 
 	$.catchAnchorLinks( {
         navbarOffset: 10

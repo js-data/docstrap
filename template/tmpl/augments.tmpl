@@ -4,7 +4,5 @@
 ?>
 
 <?js if (data.augments && data.augments.length) { ?>
-    <ul><?js data.augments.forEach(function(a) { ?>
-        <li><?js= self.linkto(a, a) ?></li>
-    <?js }) ?></ul>
+    This class extends the <?js= self.linkto(data.augments[0], data.augments[0]) ?> class.
 <?js } ?>

@@ -27,6 +27,34 @@ var template = require('jsdoc/template'),
   view,
   outdir = env.opts.destination;
 
+var origLinkto = linkto;
+linkto = function () {
+  var args = Array.prototype.slice.call(arguments);
+  var type = args[0].toLowerCase();
+  if (type === 'promise') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise</a>';
+  } else if (type === 'object') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>';
+  } else if (type === 'string') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>';
+  } else if (type === 'number') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">Number</a>';
+  } else if (type === 'boolean') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank">Boolean</a>';
+  } else if (type === 'array') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank">Array</a>';
+  } else if (type === 'array.<object>') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank">Array</a>' +
+      '.&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>&gt;';
+  } else if (type === 'array.<string>') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank">Array</a>' +
+      '.&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>&gt;';
+  } else if (type === 'array.<number>') {
+    return '<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank">Array</a>' +
+      '.&lt;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">Number</a>&gt;';
+  }
+  return origLinkto.apply(null, args);
+}
 var globalUrl = helper.getUniqueFilename('global');
 var indexUrl = helper.getUniqueFilename('index');
 
