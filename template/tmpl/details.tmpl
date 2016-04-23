@@ -24,6 +24,9 @@ var self = this;
         <?js } else if (data.meta && this.navOptions.outputSourcePath) { ?>
           <th>Source</th>
         <?js } ?>
+        <?js if (data.see && see.length) {?>
+          <th>See</th>
+        <?js } ?>
       </tr>
     </thead>
     <tbody>
@@ -50,6 +53,13 @@ var self = this;
         <?js } else if (data.meta && this.navOptions.outputSourcePath) { ?>
           <td>
             <?js= meta.shortpath ?>
+          </td>
+        <?js } ?>
+        <?js if (data.see && see.length) {?>
+          <td>
+            <ul><?js see.forEach(function(s) { ?>
+              <li><?js= self.linkto(s) ?></li>
+              <?js }); ?></ul>
           </td>
         <?js } ?>
       </tr>
@@ -166,15 +176,6 @@ var self = this;
   <dd class="tag-tutorial">
     <ul><?js tutorials.forEach(function(t) { ?>
       <li><?js= self.tutoriallink(t) ?></li>
-      <?js }); ?></ul>
-  </dd>
-  <?js } ?>
-
-  <?js if (data.see && see.length) {?>
-  <dt class="tag-see method-doc-label method-doc-details-label">See:</dt>
-  <dd class="tag-see">
-    <ul><?js see.forEach(function(s) { ?>
-      <li><?js= self.linkto(s) ?></li>
       <?js }); ?></ul>
   </dd>
   <?js } ?>

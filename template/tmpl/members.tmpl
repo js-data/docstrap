@@ -4,8 +4,7 @@ var self = this;
 ?>
 <hr>
 <dt class="name" id="<?js= id ?>">
-    <!-- <h4><?js= data.attribs + name + (data.signature ? data.signature : '') ?></h4> -->
-    <h4><?js= id ?></h4>
+    <h4><strong><?js= data.attribs + name ?></strong></h4>
 
     <?js if (data.summary) { ?>
     <p class="summary"><?js= summary ?></p>
@@ -21,7 +20,13 @@ var self = this;
     <?js= self.partial('details.tmpl', data) ?>
 
     <?js if (data.examples && examples.length) { ?>
-        <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
-        <?js= this.partial('examples.tmpl', examples) ?>
+        <div class="code-panel panel panel-warning">
+          <div class="panel-heading">
+            <strong>Example<?js= examples.length > 1? 's':'' ?></strong>
+          </div>
+          <div class="panel-body">
+            <?js= this.partial('examples.tmpl', examples) ?>
+          </div>
+        </div>
     <?js } ?>
 </dd>
