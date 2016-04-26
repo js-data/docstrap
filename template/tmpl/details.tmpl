@@ -24,14 +24,14 @@ var self = this;
         <?js } else if (data.meta && this.navOptions.outputSourcePath) { ?>
           <th>Source</th>
         <?js } ?>
-        <?js if (data.see && see.length) {?>
-          <th>See</th>
-        <?js } ?>
         <?js if (data.overrides) { ?>
           <th>Overrides</th>
         <?js } ?>
         <?js if (data.tutorials && tutorials.length) {?>
           <th>Tutorials</th>
+        <?js } ?>
+        <?js if (data.see && see.length) {?>
+          <th>See</th>
         <?js } ?>
         <?js if (data.todo && todo.length) {?>
           <th>To Do</th>
@@ -71,8 +71,8 @@ var self = this;
         <?js } ?>
         <?js if (data.tutorials && tutorials.length) {?>
           <td>
-            <ul><?js tutorials.forEach(function(t) { ?>
-              <li><?js= self.tutoriallink(t) ?></li>
+            <ul><?js tutorials.forEach(function(t) { var _t = JSON.parse(t); ?>
+              <li><a href="<?js= _t[0] ?>"><?js= _t[1] ?></a></li>
               <?js }); ?></ul>
           </td>
         <?js } ?>
