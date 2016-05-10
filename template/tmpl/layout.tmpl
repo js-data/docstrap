@@ -20,13 +20,7 @@
       background: none;
     }
     #toc {
-      position: fixed;
       margin-top: 62px;
-      max-height: 82%;
-      max-height: calc(100% - 72px);
-      overflow: auto;
-      padding: 5px;
-      max-width: 25%;
     }
     #toc .list-group-item {
       padding: 5px 15px;
@@ -46,6 +40,9 @@
     .code-panel.panel pre {
       background-color: #FBFBFB;
       border-color: #E6E5E5;
+    }
+    .page-title {
+      color: #000;
     }
     span.param-type a {
       padding: 3px 5px;
@@ -108,7 +105,7 @@
 <div class="row">
 
 	<?js if(docs && docs[0].kind !== "source"){ ?>
-		<div class="col-md-3 hidden-xs hidden-sm hidden-md">
+		<div class="col-md-4 hidden-xs hidden-sm hidden-md">
 			<div id="toc"></div>
 		</div>
 	<?js } ?>
@@ -116,7 +113,7 @@
 	<!-- <div class="clearfix"></div> -->
 
 	<?js if(docs && docs[0].kind !== "source"){ ?>
-	<div class="col-md-8 col-md-offset-4">
+	<div class="col-md-8">
 	<?js } else { ?>
 	<div class="col-md-12">
 	<?js } ?>
@@ -212,7 +209,8 @@ $( function () {
 		},
 		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
 		showAndHide : false,
-		smoothScrolling: true
+		smoothScrolling: true,
+    highlightOnScroll: false
 	} );
 
 	$( "#main span[id^='toc']" ).addClass( "toc-shim" );

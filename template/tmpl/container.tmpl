@@ -57,9 +57,15 @@
         <?js= self.partial('details.tmpl', doc) ?>
 
         <?js if (doc.examples && doc.examples.length) { ?>
-            <h3>Example<?js= doc.examples.length > 1? 's':'' ?></h3>
-            <?js= self.partial('examples.tmpl', doc.examples) ?>
-        <?js } ?>
+            <div class="code-panel panel panel-warning">
+              <div class="panel-heading">
+                <strong>Example<?js= doc.examples.length > 1? 's':'' ?></strong>
+              </div>
+              <div class="panel-body">
+                <?js= self.partial('examples.tmpl', doc.examples) ?>
+              </div>
+            </div>
+          <?js } ?>
     <?js } ?>
     </div>
 
