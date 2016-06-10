@@ -20,18 +20,22 @@
       background: none;
     }
     #toc {
+      position: fixed;
       margin-top: 62px;
+      overflow-y: scroll;
+      max-height: 85%;
     }
-    #toc .list-group-item {
-      padding: 5px 15px;
+    #toc .toc-list-group-item {
+      display: block;
     }
-    #toc .list-group-item span.toc-h3 {
+    #toc .toc-list-group-item.active {
       font-weight: bold;
     }
-    #toc .list-group-item span.toc-h4 {
-      font-family: monospace;
-      letter-spacing: -1px;
-      font-size: 13px;
+    #toc .toc-list-group-item span.toc-h3 {
+      font-weight: bold;
+    }
+    #main {
+      padding-left: 1%;
     }
     article h4.name, article dt.name {
       font-family: monospace;
@@ -85,35 +89,25 @@
 			</li>
 			<?js }); ?>
 		</ul>
-		<div class="col-sm-3 col-md-3">
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
 	</div>
 
 </div>
 </div>
 
 
-<div class="container" id="toc-content">
+<div style="padding: 1%" id="toc-content">
 <div class="row">
 
 	<?js if(docs && docs[0].kind !== "source"){ ?>
-		<div class="col-md-4 hidden-xs hidden-sm hidden-md">
-			<div id="toc"></div>
+		<div class="col-lg-3 col-md-4 hidden-xs hidden-sm toc-wrapper">
+			<div id="toc" class="col-lg-3 col-md-4 hidden-xs hidden-sm toc-wrapper"></div>
 		</div>
 	<?js } ?>
 
 	<!-- <div class="clearfix"></div> -->
 
 	<?js if(docs && docs[0].kind !== "source"){ ?>
-	<div class="col-md-8">
+	<div class="col-lg-9 col-md-8">
 	<?js } else { ?>
 	<div class="col-md-12">
 	<?js } ?>
@@ -160,7 +154,7 @@
 
 <script src="scripts/docstrap.lib.js"></script>
 <script src="scripts/toc.js"></script>
-<script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+<!-- <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/languages/javascript.min.js"></script>
 
@@ -210,7 +204,7 @@ $( function () {
 		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
 		showAndHide : false,
 		smoothScrolling: true,
-    highlightOnScroll: false
+    highlightOnScroll: true
 	} );
 
 	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
@@ -284,10 +278,17 @@ $( function () {
 </script>
 <?js } ?>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		SearcherDisplay.init();
-	});
+<script src="https://embed.tonicdev.com"></script>
+<script>
+  $('.tonic').each(function (index, el) {
+    var $el = $(el);
+    var html = $el.html();
+    $el.empty();
+    Tonic.createNotebook({
+      element: document.getElementById($el.attr('id')),
+      source: html
+    });
+  });
 </script>
 
 </body>
