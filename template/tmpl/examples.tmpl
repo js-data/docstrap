@@ -3,9 +3,14 @@
     data.forEach(function(example) {
         if (example.caption) {
     ?>
-        <p class="code-caption"><?js= example.caption ?></p>
+        <p class="code-caption" id="btn-<?js= example.caption ?>">
+          <button class="btn btn-primary" onclick="loadTonic('<?js= example.caption ?>')">Try it out</button>
+        </p>
     <?js } ?>
-    <pre><code class="<?js= example.lang ?>"><?js~ example.code ?></code></pre>
+    <pre id="pre-<?js= example.caption ?>"><code class="<?js= example.lang ?>"><?js~ example.code ?></code></pre>
+    <div class="tonic" id="tonic-<?js= example.caption ?>" style="display: none;">
+      <?js~ example.code ?>
+    </div>
 <?js
     });
 ?>
